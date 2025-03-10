@@ -1,0 +1,24 @@
+//   subset - I
+class Solution {
+
+        List<List<Integer>> groups = new LinkedList<>();
+     List<Integer> temp = new LinkedList<>();
+
+    public List<List<Integer>> subsets(int[] nums) {
+           dfs(nums,0);
+           return groups;
+    }
+    public void dfs(int[] nums,int i){
+        // base condition when it reach to end 
+        if(i==nums.length){
+            groups.add(new ArrayList<>(temp));
+            return;
+        }
+
+        temp.add(nums[i]); //left side added elements untill end 
+        dfs(nums, i+1);   //recurse left
+        temp.removeLast();  //remove last element 
+        dfs(nums,i+1);   //recurse right 
+
+    }
+}
