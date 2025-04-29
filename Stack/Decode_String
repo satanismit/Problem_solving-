@@ -1,0 +1,43 @@
+
+
+class Solution {
+   
+
+    public String decodeString(String s) {
+
+         Stack<Integer> countstack=new Stack<>();
+         Stack<StringBuilder> stringstack=new Stack<>();
+
+         StringBuilder curr=new StringBuilder();
+        int num=0;
+         for(char c:s.toCharArray()){
+
+            if(Character.isDigit(c)){
+                num=num*10 +(int)(c-'0');
+            }else if(c == '['){
+
+                countstack.push(num);
+                num=0;
+
+                stringstack.push(curr);
+                curr=new StringBuilder();
+
+            }
+            else if(c==']'){
+
+                int rep=countstack.pop();
+                StringBuilder temp=curr;
+                curr=stringstack.pop();
+                while(rep-->0){
+                    curr.append(temp);
+                }
+
+            }
+            else{
+                curr.append(c);
+            }
+         }
+
+         return curr.toString();
+    }
+}
